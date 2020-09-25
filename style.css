@@ -73,7 +73,7 @@ html, body {
 	height: 279px;
 }
 
-.btnPrefix {
+.textNickname {
 	position: absolute;
 	top: 458px;
 	left: 333.5px;
@@ -87,6 +87,7 @@ html, body {
 	font-weight: normal;
 	font-size: 20px;
 	color: #BFBDBD;
+	text-align: center;
 }
 
 .line {
@@ -137,7 +138,7 @@ html, body {
 	line-height: 25px;
 }
 
-.circlesOne, .circlesTwo, .circlesThree {
+.circles {
 	display: block;
 	margin: 0 auto;
 }

@@ -4,29 +4,54 @@ let state = {
 	colorNickname: 'black'
 }
 
-const color = (type) => {
-	let pathElem = document.querySelector('.pathElem');
-	pathElem.parentElement.addEventListener('click', (event) => {
-		if(event.target.tagName === 'path' && type === 'text') {
-			let item = event.target;
-			state.colorText = getComputedStyle(item).fill
-		} else if (event.target.tagName === 'path' && type === 'prefix') {
-			let item = event.target;
-			state.colorPrefix = getComputedStyle(item).fill
-		} else if (event.target.tagName === 'path' && type === 'nickname') {
-			let item = event.target;
-			state.colorNickname = getComputedStyle(item).fill
+const clearSelect = (event) => {
+	let contain = event.parentElement.children;
+	for(let item of contain) {
+		if(item.getAttribute('stroke') === 'orange') {
+			item.removeAttribute('stroke')
+			item.removeAttribute('stroke-width')
 		}
-	})
+	}
+}
+
+const color = (type) => {
+	let circles = document.querySelectorAll('.circles');
+	for(let elem of circles) {
+		for(let elemChild of elem.children) {
+			elemChild.addEventListener('click', () => {
+				if(elemChild.className.baseVal === 'itemsOne' && type === 'text') {
+					state.colorText = getComputedStyle(elemChild).fill
+				} else if (elemChild.className.baseVal === 'itemsTwo' && type === 'prefix') {
+					state.colorPrefix = getComputedStyle(elemChild).fill
+				} else if (elemChild.className.baseVal === 'itemsThree' && type === 'nickname') {
+					state.colorNickname = getComputedStyle(elemChild).fill
+				}
+				clearSelect(elemChild)
+				elemChild.setAttribute('stroke', 'orange')
+				elemChild.setAttribute('stroke-width', 2)
+			})
+		}
+	}
 }
 
 const check = () => {
 	let textOne = document.querySelector('.one');
 	let textTwo = document.querySelector('.two');
 	let textThree = document.querySelector('.three');
-	textOne.style.color = state.colorText;
-	textTwo.style.color = state.colorPrefix;
-	textThree.style.color = state.colorNickname;
+	textOne.style.color = state.colorPrefix;
+	textTwo.style.color = state.colorNickname;
+	textThree.style.color = state.colorText;
+}
+
+const editNickname = () => {
+	let textNickname = document.querySelector('.textNickname');
+	let textEdit = document.querySelector('.two');
+	//CHECK
+	textEdit.textContent = `[${textNickname.value}]`;
+	//CHECK
+	textNickname.addEventListener('input', () => {
+		textEdit.textContent = `[${textNickname.value}]`
+	})
 }
 
 const clickPerform = () => check()
@@ -34,3 +59,4 @@ const clickPerform = () => check()
 color('text')
 color('prefix')
 color('nickname')
+editNickname()
