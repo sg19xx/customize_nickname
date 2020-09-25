@@ -1,1 +1,2 @@
-# customize_nickname
+# Customize_Nickname
+Nickname customizer for the game.
